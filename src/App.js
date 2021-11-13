@@ -9,11 +9,25 @@ function App() {
   const [loading, getLoading] = useState(true);
   const [tours, getTours] = useState([])
 
+
+  const removeTour = (id) => {
+    const newTour = tours.filter(i => i.id !== id)
+    return getTours(newTour)
+  }
+
+
   const fetchData = async () => {
-    getLoading(false)
-    let apiValue = await fetch(url);
-    let jsonValue = await apiValue.json();
-    console.log(jsonValue)
+    getLoading(true)
+    try {
+
+      let apiValue = await fetch(url);
+      let jsonValue = await apiValue.json();
+      getTours(jsonValue)
+      getLoading(false)
+    } catch (error) {
+      getLoading(false)
+        (console.error)
+    }
   }
 
 
@@ -30,7 +44,7 @@ function App() {
   }
   return (
     <main>
-      <Tours />
+      <Tours tours={tours} removeTour={removeTour} />
     </main>
   )
 }

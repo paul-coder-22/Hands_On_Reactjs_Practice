@@ -1,10 +1,21 @@
 import React from 'react';
+import Tour from './Tour';
 
-function Tours(props) {
+function Tours({ tours, removeTour }) {
     return (
-        <div>
-            <h1>Tours component</h1>
-        </div>
+        <section>
+            <div className="title">
+                <h2>Ours Tours</h2>
+                <div className="underline"></div>
+            </div>
+            <div>
+                {
+                    tours.map((tour) => {
+                        return <Tour key={tour.id} {...tour} removeTour={removeTour} ></Tour>;
+                    })
+                }
+            </div>
+        </section>
     );
 }
 
