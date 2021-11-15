@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 function Tour({ id, image, info, price, name, removeTour }) {
-    const [readMore, setReadMore] = useState(true)
+    const [readMore, setReadMore] = useState(false)
     return <article className="single-tour">
         <img src={image} alt={name} />
         <footer>
