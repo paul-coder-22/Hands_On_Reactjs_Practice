@@ -24,3 +24,7 @@
   .new-expense__actions {
     text-align: right;
   }
+
+  .expenses-list__fallback {
+    text-align: center;
+  }

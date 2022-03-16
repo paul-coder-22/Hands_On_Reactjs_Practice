@@ -9,19 +9,20 @@ const ExpenseItem = (props) => {
 
     const clickHandler = () => {
         setTitle('Updated')
-        console.log(upTitle);
     }
     return (
-        <Card className='expense-item'>
-            <ExpenseDate date={date} />
-            <div className='expense-item__description'>
-                <h2>{upTitle}</h2>
-                <div className='expense-item__price'>
-                    ${amount}
+        <li>
+            <Card className='expense-item'>
+                <ExpenseDate date={date} />
+                <div className='expense-item__description'>
+                    <h2>{upTitle}</h2>
+                    <div className='expense-item__price'>
+                        ${amount}
+                    </div>
                 </div>
-            </div>
-            <button onClick={clickHandler}>Change Title</button>
-        </Card>
+                {/* <button onClick={clickHandler}>Change Title</button> */}
+            </Card>
+        </li>
     );
 };
 
