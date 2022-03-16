@@ -18,6 +18,7 @@ const NewExpenseForm = (props) => {
 
     const submitHandler = (event) => {
         formValue.date = new Date(formValue.date)
+        formValue.amount = +formValue.amount
         event.preventDefault()
         props.onSaveExpenseData(formValue)
         setForm({
