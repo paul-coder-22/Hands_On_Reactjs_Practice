@@ -1,23 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
-import { useState } from 'react';
-import questions from './data';
-import Question from './Question';
+import React, { useState } from 'react';
 
-function App() {
-  const [question, getQuestion] = useState(questions);
-  return (
-    <main className="App">
-      <div className="container">
-        <h3>question and answer about logins</h3>
-        <section className="info">
-          {
-            question.map((question) => <Question key={question.id} {...question} />)
-          }
-        </section>
-      </div>
-    </main>
+import CourseGoalList from './components/CourseGoals/CourseGoalList/CourseGoalList';
+import CourseInput from './components/CourseGoals/CourseInput/CourseInput';
+import './App.css';
+
+const App = () => {
+  const [courseGoals, setCourseGoals] = useState([
+    { text: 'Do all exercises!', id: 'g1' },
+    { text: 'Finish the course!', id: 'g2' }
+  ]);
+
+  const addGoalHandler = enteredText => {
+    setCourseGoals(prevGoals => {
+      const updatedGoals = [...prevGoals];
+      updatedGoals.unshift({ text: enteredText, id: new Date().getTime().toString() + Math.floor(Math.random() * 1000000) });
+      return updatedGoals;
+    });
+  };
+
+  const deleteItemHandler = goalId => {
+    console.log(goalId);
+    setCourseGoals(prevGoals => {
+      const updatedGoals = prevGoals.filter(goal => goal.id !== goalId);
+      console.log(updatedGoals);
+      return updatedGoals;
+    });
+  };
+
+  let content = (
+    <p style={{ textAlign: 'center' }}>No goals found. Maybe add one?</p>
   );
-}
+
+  if (courseGoals.length > 0) {
+    content = (
+      <CourseGoalList items={courseGoals} onDeleteItem={deleteItemHandler} />
+    );
+  }
+
+  return (
+    <>
+      <section id="goal-form">
+        <CourseInput onAddGoal={addGoalHandler} />
+      </section>
+      <section id="goals">
+        {content}
+      </section>
+    </>
+  );
+};
 
 export default App;
